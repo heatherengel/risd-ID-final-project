@@ -2,7 +2,7 @@
 
 :root {
     --gap: 2.5rem;
-    --panelW: 75vw;
+    --panelW: min(75vw, 825px);
     --sidePad: calc(
         (100vw - var(--panelW)) / 2
     );
@@ -34,6 +34,7 @@
     scroll-snap-type: x proximity;
     scroll-snap-stop: always;
     scroll-behavior: auto;
+
     overflow-x: auto;
     overflow-y: hidden;
     padding-block: 0.75rem;
@@ -51,8 +52,6 @@
 /* --- Panels --- */
 .panel {
     scroll-snap-align: center;
-    background: #f8fafc;
-    color: #0f172a;
     display: flex;
     flex: none;
     flex-direction: column;
@@ -66,4 +65,17 @@
 .panel > *:not(.p-layer) {
     position: relative;
     z-index: 1;
+}
+
+/* --- Placeholder for future panels --- */
+.p-1 { background: linear-gradient(180deg, #e2e8f0, #f8fafc); }
+.p-2 { background: linear-gradient(180deg, #fde68a, #fff7ed); }
+.p-3 { background: linear-gradient(180deg, #c7d2fe, #eef2ff); }
+.p-4 { background: linear-gradient(180deg, #bbf7d0, #ecfdf5); }
+
+/* --- Placeholder for future resizing --- */
+@media (max-height: 650px){
+    .panel {
+        background: #ff0000;
+    }
 }
