@@ -199,7 +199,7 @@
 }
 
 /* Hover color block inset inside each item */
-#pg-wrapper.sabbatical grid-item .grid-overlay {
+#pg-wrapper.sabbatical .grid-item .grid-overlay {
   position: absolute;
   inset: 25px;  /* inset “margin” for the block */
   background: rgba(255,255,255,0.8);
@@ -209,6 +209,10 @@
   justify-content: center;
   text-align: center;
   padding: 1rem;
+  /* make sure it sits above the ::before background layer */
+  z-index: 1;
+
+  /* start hidden; show on hover/focus as you already do */
   opacity: 0;
   transition: opacity .25s ease;
 }
