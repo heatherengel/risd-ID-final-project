@@ -1,0 +1,238 @@
+/* ==========================================================================
+   PAGE WRAPPER (shared)
+   -------------------------------------------------------------------------- */
+
+#pg-wrapper {
+    display: flex;
+    flex: 1 1 auto;
+    flex-direction: column;
+    margin: 0 var(--gutter);
+    box-sizing: border-box;
+    background-color: #f5f5f5;
+}
+
+#pg-wrapper h1 {                /* generic heading defaults */
+  font-size: 2rem;
+  margin-bottom: 1rem;
+}
+
+#pg-wrapper p {                 /* generic copy defaults */
+  font-size: 0.75rem;
+  line-height: 1.6;
+  margin-bottom: 1.5rem;
+}
+
+/* Content area inside each page (shared gutters) */
+.pg-body {
+    display: flex;
+    flex-direction: column;
+    flex: 1 1 auto;
+    min-height: 0;
+    padding: 0.5rem var(--gutter);
+}
+
+/* Sabbatical page - custom body margins */
+#pg-wrapper.sabbatical .pg-body {
+    margin-top: 2rem;
+    margin-bottom: 3rem;
+}
+
+
+/* ==========================================================================
+   HERO STYLE
+   -------------------------------------------------------------------------- */
+/* Keep hero sizing on the combined selector (no fixed height on .pg-title) */
+.pg-title {
+    margin: 0;
+    padding: 1.5rem var(--gutter, 3.5rem);
+    width: 100%;
+    box-sizing: border-box;
+    display: flex;
+    align-items: flex-end;
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: #0f172a;
+}
+
+/* Single, canonical hero definition */
+.pg-title.hero {
+  position: relative;
+  height: 50vh; /* one source of truth; adjust as needed */
+  background: url('../img/risd/risd-bg.webp') center/cover no-repeat;
+  display: flex;
+  align-items: center;           /* vertically center the title text */
+  justify-content: center;
+  overflow: hidden;
+  color: #fff;                   /* ensure readable over bg */
+}
+
+/* Translucent overlay for contrast */
+.pg-title.hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(0,0,0,0.5);
+  z-index: 0;
+}
+
+/* Title text sits above overlay */
+.pg-title.hero .hero-text {
+  position: relative;
+  z-index: 1;
+}
+
+
+
+/* ==========================================================================
+   RISD PAGE (portfolio grid + image effects)
+   -------------------------------------------------------------------------- */
+/* Grid container */
+#risd-grid.portfolio-grid.clean {
+  display: grid;
+  gap: 1.5rem;
+  justify-content: center;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  max-width: 1100px;
+  margin: 2rem auto;
+}
+
+/* Image frame */
+#pg-wrapper.risd .thumb {
+  overflow: hidden;
+  border-radius: 2px;
+  background: #eaeaea;
+  /* aspect-ratio: 4 / 3; /* one definition */
+}
+
+/* Images: grayscale by default, color on hover */
+#pg-wrapper.risd .thumb img {
+  width: 100%;
+  height: 100%;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+  transform: scale(1);                 /* baseline */
+  transition: transform 0.2s ease;
+  filter: grayscale(50%) saturate(20%); /* default: monochrome */
+}
+
+/* Tile text */
+#pg-wrapper.risd .tile h3 {
+  font-size: 0.9rem;
+  font-weight: 600;
+  margin-top: 0.75rem;
+  margin-bottom: 0.25rem;
+  color: #0f172a;
+  text-transform: none;
+  letter-spacing: -0.02rem;
+}
+
+/* Custom description element behaves like a paragraph */
+#pg-wrapper.risd .tile descript {
+  display: block;
+  color: #475569;
+  font-size: 0.7rem;
+  line-height: 1.3;
+  margin: 0;
+}
+
+/* Filter UI */
+#pg-wrapper.risd .filterbar { display:flex; gap: 0.75rem; margin-top:1rem; }
+
+#pg-wrapper.risd .filter {
+  font-family: "Roboto Mono", monospace;
+  font-size: 0.7rem;
+  font-weight: 300;
+  line-height: 1.2;
+  color: #0f172a;
+  background: none; border: none;
+  transition: color 0.2s ease;
+}
+
+#pg-wrapper.risd .filter:hover,
+#pg-wrapper.risd .filter.active { font-weight: 600; }
+
+.tile {
+  transition: opacity 0.2s ease, transform 0.2s ease;
+}
+
+.tile.is-hidden {
+  opacity: 0;
+  pointer-events: none;
+  display: none;
+}
+
+/* Per-tile image framing tweaks you set earlier (keep/tune as needed) */
+#pg-wrapper.risd #risd-grid .tile:nth-child(1) .thumb img { object-position: center 43%; transform: scale(1.65); }
+#pg-wrapper.risd #risd-grid .tile:nth-child(2) .thumb img { object-position: center 7%; transform: scale(1.6); }
+#pg-wrapper.risd #risd-grid .tile:nth-child(3) .thumb img { object-position: center 15%; transform: scale(1.15); }
+
+
+
+/* ==========================================================================
+   SABBATICAL PAGE (masonry grid + hover overlay)
+   -------------------------------------------------------------------------- */
+#pg-wrapper.sabbatical .masonry-grid-container {
+  display: grid;
+  flex: 1 1 auto;
+  min-height: 0;
+  height: auto;
+  gap: 0;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  grid-template-rows: repeat(2, 1fr);
+}
+
+#pg-wrapper.sabbatical .masonry-grid-item {
+  background-color: #0f172a;
+  border: 1px solid #fff;
+  display: flex;
+  position: relative; /* anchor for overlay and ::before */
+  overflow: hidden;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.2em;
+}
+
+/* Hover color block inset inside each item */
+#pg-wrapper.sabbatical .masonry-grid-item .grid-overlay {
+  position: absolute;
+  inset: 25px;  /* inset “margin” for the block */
+  background: rgba(255,255,255,0.8);
+  color: #000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 1rem;
+  opacity: 0;
+  transition: opacity .25s ease;
+}
+
+#pg-wrapper.sabbatical .masonry-grid-item:hover .grid-overlay,
+#pg-wrapper.sabbatical .masonry-grid-item:focus-within .grid-overlay {
+  opacity: 1;
+}
+
+/* Background-image layers per item (zoom on hover) */
+#pg-wrapper.sabbatical .masonry-grid-item:nth-child(1)::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: url("../img/wolfie.png") center/cover no-repeat;
+  transform: scale(1);
+  transition: transform .4s ease;
+  z-index: 0;
+}
+
+#pg-wrapper.sabbatical .masonry-grid-item:nth-child(2)::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: url("../img/risd-id.jpg") 75% 82% / 145%;
+  transform: scale(1);
+  transition: transform .4s ease;
+  z-index: 0;
+}
+
+#pg-wrapper.sabbatical .masonry-grid-item:hover::before {
+  transform: scale(1.05);
+}

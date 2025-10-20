@@ -1,0 +1,248 @@
+/* page-wrapper.css */
+
+#page-wrapper {
+    display: flex;
+    flex: 1 1 auto;
+    flex-direction: column;
+    min-height: 0;
+    margin: 0 auto;
+    box-sizing: border-box;
+    background-color: #fff;
+}
+
+    #page-wrapper h1 {
+        font-size: 2rem;
+        margin-bottom: 1rem;
+    }
+
+    #page-wrapper p {
+        font-size: 0.75rem;
+        line-height: 1.6;
+        margin-bottom: 1.5rem;
+    }
+
+#page-wrapper.project-page {
+    width: 100%;
+    box-sizing: border-box;
+    background: inherit;
+    padding-bottom: 3rem; /* adjust as needed, e.g. 2rem–4rem */
+}
+
+.pg-title {
+    margin: 0;
+    padding: 1.5rem var(--gutter, 3.5rem);
+    width: 100%;
+    box-sizing: border-box;
+    display: flex;
+    align-items: flex-end;
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: #0f172a;
+}
+
+.pg-body {
+    display: flex;        /* NEW */
+    flex-direction: column; /* NEW */
+    flex: 1 1 auto;       /* NEW */
+    min-height: 0;        /* NEW */
+    padding: 0.5rem var(--gutter);
+}
+
+#page-wrapper.sabbatical .pg-body {
+  margin-top: 2rem;     /* placeholder */
+  margin-bottom: 3rem;  /* placeholder */
+}
+
+/* Basic grid */
+.portfolio-grid.clean {
+  display: grid;
+  gap: 1.5rem;
+  justify-content: center;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  max-width: 1100px;
+  margin: 2rem auto;
+}
+
+/* Image container */
+.thumb {
+  overflow: hidden;
+  border-radius: 2px;
+  background: #eaeaea;
+}
+
+/* Image itself */
+.thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transform: scale(1);
+  transition: transform 0.5s ease;
+  filter: grayscale(50%) saturate(30%);
+  transition: filter 0.4s ease; /* tweak duration as you like */
+}
+
+/* Subtle hover grow */
+.tile:hover .thumb img {
+  
+}
+
+/* Text content */
+.tile h3 {
+  font-size: 0.9rem;
+  font-weight: 600;
+  margin-top: 0.75rem;
+  margin-bottom: 0.25rem;
+  color: #0f172a;
+  text-transform: none;
+  letter-spacing: -0.02rem;
+}
+
+.tile descript {
+  display: block;
+  color: #475569;
+  font-size: 0.7rem;
+  line-height: 1.3;
+  margin: 0;
+}
+
+/* Optional: Add consistent height or aspect ratio */
+.thumb {
+  aspect-ratio: 4 / 3;
+}
+
+/* filter bar */
+.filterbar{
+  display:flex; gap:.75rem; margin-top:1rem;
+}
+.filter{
+    font-family: "Roboto Mono", monospace;
+    font-size: 0.7rem;
+    font-weight: 300;
+    line-height: 1.2;
+    color: #0f172a;
+    transition: color .2s ease;
+    background: none; border: none;
+}
+.filter:hover{ font-weight: 600; }
+.filter.active{ font-weight: 600; }
+
+/* hide/show tiles */
+.tile{ transition:opacity .2s ease, transform .2s ease; }
+.tile.is-hidden{ opacity:0; transform:scale(.98); pointer-events:none; display:none; }
+
+
+.hero {
+  position: relative;
+  background-attachment: scroll;
+  height: 50vh;
+  background: url('../img/risd/risd-bg.webp') center/cover no-repeat;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+/* Optional translucent overlay for readability */
+.hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 0;
+}
+
+.pg-title.hero {
+  /* no z-index needed here */
+  color: #fff;              /* ensure readable */
+}
+
+/* this is what sits ABOVE the overlay */
+.pg-title.hero .hero-text {
+  position: relative;
+  z-index: 1;
+}
+
+.masonry-grid-container {
+  display: grid;
+  flex: 1 1 auto;
+  min-height: 0;
+  height: auto;
+  gap: 0px; /* Adjust gap between items as desired */
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); /* Creates responsive columns */
+  grid-template-rows: repeat(2, 1fr);
+}
+
+.masonry-grid-item {
+  background-color: #0f172a; /* Background color for items */
+  border: 1px solid #fff; /* Border for items */
+  display: flex; /* Centers content within items */
+  position: relative; /* anchor for absolute overlay */
+  overflow: hidden;   /* clip overlay corners if needed */
+  justify-content: center;
+  align-items: center;
+  font-size: 1.2em;
+}
+
+/* the color block that holds your text */
+#page-wrapper.sabbatical .masonry-grid-item .grid-overlay {
+  position: absolute;
+  inset: 25px;                 /* ~10px margin from parent on all sides */
+  background: rgba(255,255,255,0.8);/* placeholder color */
+  color: #000;                 /* placeholder text color */
+  display: flex;               /* center content nicely */
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 1rem;               /* placeholder inner padding */
+  opacity: 0;                  /* hidden by default */
+  transition: opacity .25s ease;
+}
+
+/* show on hover/focus */
+#page-wrapper.sabbatical .masonry-grid-item:hover .grid-overlay,
+#page-wrapper.sabbatical .masonry-grid-item:focus-within .grid-overlay {
+  opacity: 1;
+}
+
+#page-wrapper.sabbatical .masonry-grid-item:nth-child(1)::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: url("../img/wolfie.png") center/cover no-repeat;
+  transform: scale(1);
+  transition: transform 0.4s ease;
+  z-index: 0;
+}
+
+#page-wrapper.sabbatical .masonry-grid-item:nth-child(2)::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: url("../img/risd-id.jpg") 75% 82% / 145%;
+  transform: scale(1);
+  transition: transform 0.4s ease;
+  z-index: 0;
+}
+
+#page-wrapper.sabbatical .masonry-grid-item:hover::before {
+  transform: scale(1.05);
+}
+
+/* REORGANIZE */
+/* REORGANIZE */
+/* REORGANIZE */
+
+#risd-grid .tile:nth-child(1) .thumb img {
+  object-position: center 45%;
+  transform: scale(1.6);
+}
+
+#risd-grid .tile:nth-child(2) .thumb img {
+  object-position: center 10%;
+  transform: scale(1.6);
+}
+
+#risd-grid .tile:nth-child(3) .thumb img {
+  object-position: center 15%;
+  transform: scale(1.15);
+}

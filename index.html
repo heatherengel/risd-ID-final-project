@@ -4,33 +4,53 @@
         <title>Heather Engel</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
         <link rel="stylesheet" href="css/main.css">
-        <link rel="stylesheet" href="css/page-wrapper.css">
-        <link rel="stylesheet" href="css/project-page.css">
-        <link rel="stylesheet" href="css/gallery.css">
+        <link rel="stylesheet" href="css/nav.css">
+        <link rel="stylesheet" href="css/pg-wrapper.css">
     </head>
+
     <body>
-        <header class="site-header">
-            <div class="container navbar">
-                <p class="logo">Heather Engel</p>
-                <div class="menu">
-                    <span></span>
-                    <span></span>
-                    <span></span>
+        <section class="wrapper">
+            <header class="header">
+                <div class="navbar">
+                    <a class="logo" href="#/">Heather Engel</a>
+                    <div class="nav-wrap">
+                        <div class="menu"><span></span><span></span><span></span></div>
+                        <nav class="nav-panel">
+                            <ul class="nav-list">
+                                <li><a href="pages/home.html" data-partial>Home</a></li>
+                                <li><a href="pages/sabbatical.html" data-partial>Sabbatical</a></li>
+                                <li><a href="pages/portfolio.html" data-partial>Portfolio</a></li>
+                                <li><a href="pages/resume.html" data-partial>Resume</a></li>
+                                <li><a href="pages/contact.html" data-partial>Contact</a></li>
+                            </ul>
+                        </nav>
+                    </div>
                 </div>
-            </div>
-        </header>
-
-        <main id="main"></main>
-
-        <footer>
-            <div class="container site-footer">
-                © <span id="year"></span> The Angulate Group
-            </div>
-        </footer>
-
-    <script src="js/main.js"></script>
-    <script src="js/router.js"></script>
+            </header>
+            <div class="nav-overlay"></div>
         
+        
+            <section class="main">
+                <main id="main"></main>
+            </section>
+
+            <footer>
+                <div class="footer">
+                    © <span id="year"></span> The Angulate Group
+                </div>
+            </footer>
+
+            <script src="js/main.js"></script>
+            <script src="js/router.js"></script>
+            <script src="js/risd.js" defer></script>
+
+        </section>
     </body>
 </html>

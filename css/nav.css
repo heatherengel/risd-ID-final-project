@@ -1,0 +1,133 @@
+/* nav.css */
+
+/*****  RESET & TOKENS *****/
+:root {
+  --z-header: 60;
+  --z-panel: 50;
+  --z-overlay: 40;
+}
+
+
+/***** LAYOUT & STACKING *****/
+.header {
+    z-index: var(--z-header);       /* Ensures header sits above overlay/content */
+}
+
+.nav-overlay {
+    position: fixed; top: var(--headerH); bottom: 0;    /* Covers the viewport below the header */
+    left: 0; right: 0;              /* Covers the full width */
+    background: rgba(0,0,0,.65);  /* Sets semi-transparent dark layer */
+    opacity: 0;                     /* Hides overlay by default */
+    pointer-events: none;           /* Clicks pass through when hidden */
+    transition: opacity 0.5s ease;  /* Sets transition as a smooth fade */
+    z-index: var(--z-overlay);      /* Ensures overlay sits under the header but above page content */
+}
+
+
+/***** HEADER & NAV BAR *****/
+.navbar {                           /* Navbar row */
+    display: flex;                  /* Puts components (logo + nav) on one row */
+    align-items: center;
+    min-height: var(--headerH);     /* Guarantees header height */
+    padding-inline: var(--gutter);  /* Aligns with site gutters */
+}
+
+.logo {
+    font-family: "Bebas Neue", sans-serif;
+    font-kerning: normal;
+    font-weight: 400;
+    letter-spacing: -0.01em;
+    font-size: clamp(1.2rem, 4vw + 0.5rem, 2rem);
+    text-transform: uppercase;
+    text-decoration: none;
+    color: #0f172a;
+    transition: color 0.25s ease;
+    transform: translateY(2px);         /* Not sure why I need this... need to revisit */
+}
+
+.logo:hover {
+    color: #0070f3;
+}
+
+.nav-wrap {                             /* Consolidates hamburger menu and nav-panel */
+    margin-left: auto;                  /* Pushes to the far right */
+    position: relative;                 /* Anchors the dropdown absolutely to this box */
+    display: flex; align-items: center;     /* Keeps hamburger menu aligned */
+}
+
+/* Hamburger Menu */
+.menu {
+    display: flex;
+    flex-direction: column;         /* Stacks bars vertically */
+    align-items: flex-end;          /* Right-aligns ends */
+    cursor: pointer;                /* Shows pointer */
+}
+
+    /* Sets each bar: fixed thickness, color, spacing */
+    .menu span {
+        display: block;
+        width: 35px;
+        height: 2px;
+        background: #000;
+        margin: 2.5px 0;
+    }
+
+    /* Sets middle bar with full width; top/bottom shorter with animated widening */
+    .menu span:nth-child(1){ width: 25px; transition: width .5s ease; }
+    .menu span:nth-child(2){ width: 35px; }
+    .menu span:nth-child(3){ width: 25px; transition: width .15s ease; }
+
+    /* Keeps bars fixed when open/hovering the wrap */
+    .nav-wrap:hover .menu span { width: 35px; }
+
+/* Dropdown Panel */
+.nav-panel {
+    position: absolute; top: 100%;      /* Anchors the panel directly below .nav-wrap */
+    right: calc(-1 * var(--gutter));    /* Cancels the header’s right padding so the panel edge aligns with the viewport edge */
+    width: 260px; /* Extends panel to visually hits the right edge */
+    background: #fff; padding: 1.25rem;
+    opacity: 0; transform: translateY(-3px);    /* Hides and nudges up by default (for the slide-down feel) */
+    pointer-events: none;               /* Makes nav-panel “unclickable” while hidden */
+    transition: transform 0.5s ease;    /* Sets transition as a smooth fade and slide */
+    z-index: var(--z-panel);            /* Ensures nav-panel sits below header but above overlay */
+}
+
+    /* Open states via nav-wrap hover */
+    .nav-wrap:hover .nav-panel,
+    .header.open .nav-panel {
+        opacity: 1;
+        transform: translateY(0);
+        pointer-events: auto;
+    }
+
+    /* List reset + layout */
+    .nav-list {
+        list-style: none; margin: 0; padding: 0;    /* Strips bullets and spacing */
+        display: flex; flex-direction: column;      /* Stacks items vertically with consistent gaps */
+        gap: 0.4rem;
+    }
+
+    /* Link styling */
+    .nav-list a {
+        display: block;
+        font-family: "Roboto Mono", monospace;
+        font-weight: 400;
+        font-size: 0.8em;
+        text-decoration: none;
+        color: #0a0a0a;
+        letter-spacing: 0.02em;
+        padding: 0.15rem 0.1rem;
+        transition: color 0.2s ease, transform 0.2s ease;
+    }
+
+    .nav-list a:hover {
+        color: #0070f3;
+        transform: translateX(3px);
+    }
+
+/* Overlay on only when the nav-wrap is active (or header has .open) */
+.header:has(.nav-wrap:hover) + .nav-overlay,
+.header.open + .nav-overlay {
+    opacity: 1;
+    pointer-events: auto;
+}

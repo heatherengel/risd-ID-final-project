@@ -40,7 +40,7 @@
         loadIntoMain(url, { push: false }).catch(() => window.location.reload());
     });
 
-    const defaultPage = 'projects/sabbatical.html';
+    const defaultPage = 'pages/home.html';
     const initial = location.hash ? location.hash.slice(1) : defaultPage;
 
     loadIntoMain(initial, { push: false })
